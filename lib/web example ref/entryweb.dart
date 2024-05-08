@@ -1,16 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import 'compoent library.dart';
+import 'Vip web dashboard.dart';
+// import 'Web page.dart';
+import 'pages/config service/config_page.dart';
+import 'pages/dashboard/dashboard_page.dart';
+
 /* 
 here is the material page that handle 
 - go route router is passed 
 - themes data is passed 
 */
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
-import 'Component library.dart';
-import 'VIP web dashboard page.dart';
-import 'Web page.dart';
 
 class Material_Entry_Web extends StatefulWidget {
   const Material_Entry_Web({super.key});
@@ -29,7 +31,7 @@ class _MaterialStarterConfig extends State<Material_Entry_Web> {
       locale: const Locale('en', 'EN'),
       // todo: added language support such as arabic
       debugShowCheckedModeBanner: true,
-      title: 'Flutter Fake data Example Demo',
+      title: 'Flutter Example Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

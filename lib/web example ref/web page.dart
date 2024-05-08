@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
+/*
 class WebFirstPage extends StatelessWidget {
   const WebFirstPage({super.key});
 
@@ -158,7 +158,7 @@ class WebFirstPage extends StatelessWidget {
     );
   }
 }
-
+*/
 class WebSecondPage extends StatefulWidget {
   const WebSecondPage({super.key});
 
