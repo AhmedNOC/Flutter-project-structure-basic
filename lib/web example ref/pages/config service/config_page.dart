@@ -11,13 +11,14 @@ class WebSecondPage extends StatefulWidget {
 
 class _WebSecondPageState extends State<WebSecondPage> {
   bool visible = false;
+  // here define the string that should be used or bind with user inputs
   String ipaddrss = '';
   String subnetmask = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 42, 39, 33),
+      backgroundColor: const Color.fromARGB(255, 42, 39, 33),
       body: SafeArea(
         child: SingleChildScrollView(
           child: SingleChildScrollView(
@@ -25,29 +26,28 @@ class _WebSecondPageState extends State<WebSecondPage> {
             child: Container(
               // height: 100,
               // width: 300,
-              margin: EdgeInsets.all(38),
+              margin: const EdgeInsets.all(38),
               // color: Colors.amber,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SelectableText(
+                  const SelectableText(
                     "Page 2",
-                    style: TextStyle(
-                        color: const Color.fromARGB(255, 219, 219, 219)),
+                    style: TextStyle(color: Color.fromARGB(255, 219, 219, 219)),
                   ),
-                  SelectableText(
+                  const SelectableText(
                     "Config generator",
                     style: TextStyle(
                         fontSize: 38,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  SelectableText(
+                  const SelectableText(
                     "this page is used to generate network device configuration for cisco , huawie and mikrotik ",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w100,
-                        color: const Color.fromARGB(255, 199, 199, 199)),
+                        color: Color.fromARGB(255, 199, 199, 199)),
                   ),
                   Row(
                     children: [
@@ -56,46 +56,46 @@ class _WebSecondPageState extends State<WebSecondPage> {
                             0.7, // for example, 15% of the screen height
                         width: MediaQuery.of(context).size.width *
                             0.3, // 100% of the screen width
-
+                        color: Colors.transparent,
                         child: Container(
                           height: MediaQuery.of(context).size.height *
                               0.5, // for example, 15% of the screen height
                           width: MediaQuery.of(context).size.width *
                               0.18, // 100% of the screen width
-
+                          color: Colors.transparent,
                           child: ListView(
                             children: [
-                              Padding(padding: EdgeInsets.all(18)),
+                              const Padding(padding: EdgeInsets.all(18)),
+                              // here use the input to bind the onchange to the variable that defind above
                               input_field(
                                 title: 'ip address',
                                 hint: 'example : 192.168.18.18',
                                 onChangeCallback: (String value) {
-                                  print(value);
                                   ipaddrss = value;
                                   setState(() {});
                                 },
                               ),
-                              Padding(padding: EdgeInsets.all(18)),
+                              const Padding(padding: EdgeInsets.all(18)),
                               input_field(
                                 title: 'subnet mask',
                                 hint: 'example : 255.255.255.0',
                                 onChangeCallback: (String value) {
-                                  print(value);
                                   subnetmask = value;
                                   setState(() {});
                                 },
                               ),
-                              Padding(padding: EdgeInsets.all(18)),
+                              const Padding(padding: EdgeInsets.all(18)),
                               Container(
                                 // height: 30,
                                 // width: 30,
                                 //    color: Colors.white,
+                                color: Colors.transparent,
                                 child: TextButton(
                                     onPressed: () {
                                       visible = !visible;
                                       setState(() {});
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Generate",
                                       style: TextStyle(
                                           fontSize: 18,
@@ -107,41 +107,8 @@ class _WebSecondPageState extends State<WebSecondPage> {
                           ),
                         ),
                       ),
-                      Padding(padding: EdgeInsets.all(18)),
-                      Container(
-                        height: MediaQuery.of(context).size.height *
-                            0.7, // for example, 15% of the screen height
-                        width: MediaQuery.of(context).size.width *
-                            0.3, // 100% of the screen width
-
-                        child: ListView(
-                          children: [
-                            Padding(padding: EdgeInsets.all(18)),
-                            SelectableText(
-                              "Config Output",
-                              style: TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Padding(padding: EdgeInsets.all(7)),
-                            Builder(builder: (context) {
-                              return Visibility(
-                                  visible: visible,
-                                  child: SelectableText(
-                                    '''
-          interface example 
-          ip address $ipaddrss $subnetmask
-          description this is text description 
-          ''',
-                                    style: TextStyle(
-                                        color: const Color.fromARGB(
-                                            255, 219, 219, 219)),
-                                  ));
-                            })
-                          ],
-                        ),
-                      )
+                      const Padding(padding: EdgeInsets.all(18)),
+                      outputpanel(context)
                     ],
                   )
                 ],
@@ -149,6 +116,42 @@ class _WebSecondPageState extends State<WebSecondPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Container outputpanel(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height *
+          0.7, // for example, 15% of the screen height
+      width:
+          MediaQuery.of(context).size.width * 0.3, // 100% of the screen width
+      color: Colors.transparent,
+      child: ListView(
+        children: [
+          const Padding(padding: EdgeInsets.all(18)),
+          const SelectableText(
+            "Config Output",
+            style: TextStyle(
+                fontSize: 27, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const Padding(padding: EdgeInsets.all(7)),
+          Builder(builder: (context) {
+            return Visibility(
+                visible: visible,
+                // here write the config with string interpoluation so that the variables that
+                // were bind to the input could be displayed here
+                child: SelectableText(
+                  '''
+        interface example 
+        ip address $ipaddrss $subnetmask
+        description this is text description 
+        ''',
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 219, 219, 219)),
+                ));
+          })
+        ],
       ),
     );
   }
