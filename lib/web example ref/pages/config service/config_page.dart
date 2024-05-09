@@ -85,6 +85,16 @@ class _WebSecondPageState extends State<WebSecondPage> {
                                 },
                               ),
                               const Padding(padding: EdgeInsets.all(18)),
+
+                              input_field(
+                                title: 'Ajmi',
+                                hint: 'example tamata ajmi and rami',
+                                onChangeCallback: (String value) {
+                                  ipaddrss = value;
+                                  setState(() {});
+                                },
+                              ),
+                              const Padding(padding: EdgeInsets.all(18)),
                               Container(
                                 // height: 30,
                                 // width: 30,
